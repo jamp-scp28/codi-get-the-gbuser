@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="finder">
+        <h1>Find GitHub User</h1>
+        <div class="pseudo-search">
+            <input [(ngModel)]="searchedProfile" type="text" placeholder="Search User...">
+            <button><i class="fa-brands fa-github"></i></button>
+            <button (click)="findGitHubUser()" class="search-user"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+    <span *ngIf="errorMessage" class="warning-message"><i class="fa fa-warning"></i>{{errorMessage}}</span>
+    <ng-template [ngIf]="!userProfile">
+        <h3 class="not-user"><i class="fa-solid fa-face-sad-tear"></i>Ohh noo! We could not find any user by your search, try another one!</h3>
+    </ng-template>
+    <ng-template [ngIf]="userProfile">
+        <div class="center">
+            <div class="card">
+                <div class="additional">
+                    <div class="user-card">
+                        <div class="points">{{userProfile.login}}</div>
+                        <img class="round" src="https://avatars.githubusercontent.com/u/45722406?v=4" alt="user" />
+                        <div class="level">{{userProfile.created_at | date: 'dd MMM yyyy'}}</div>
+                    </div>
+                    <div class="more-info">
+                        <h1>{{userProfile.name}}</h1>
+                        <div class="coords">
+                            <span><i class="fa-sharp fa-solid fa-location-dot"></i> {{userProfile.location}}</span>
+                            <span><i class="fa-brands fa-twitter"></i> {{userProfile.twitter_username ?? 'None'}}</span>
+                        </div>
+                        <p class="center-blog"><i class="fa-solid fa-blog"></i> {{userProfile.blog}}</p>
+                        <div class="stats">
+                            <div>
+                                <div class="title">REPOS</div>
+                                <i class="fa fa-code-branch"></i>
+                                <div class="value">{{userProfile.public_repos}}</div>
+                            </div>
+                            <div>
+                                <div class="title">FOLLOWERS</div>
+                                <i class="fa-solid fa-users"></i>
+                                <div class="value">{{userProfile.followers}}</div>
+                            </div>
+                            <div>
+                                <div class="title">FOLLOWING</div>
+                                <i class="fa-solid fa-user-group"></i>
+                                <div class="value">{{userProfile.following}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>
